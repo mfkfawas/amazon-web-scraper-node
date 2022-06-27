@@ -12,11 +12,14 @@ async function scrape() {
 
   //load up the html
   const $ = cheerio.load(data);
+  //select a common container which holds the data that we need
   const item = $('div#dp-container');
 
   //extract the data that we need
   product.name = $(item).find('h1 span#productTitle').text();
-  console.log(product.name);
+  product.link = url;
+  const price = $(item).find('span .a-price-whole').first().text().replace(/[,.]/g, '');
+  console.log(price);
 }
 
 scrape();
